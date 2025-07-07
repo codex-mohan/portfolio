@@ -393,7 +393,7 @@ export function MouseFollower() {
     <>
       {/* Custom Cursor */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-500"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,
@@ -411,7 +411,7 @@ export function MouseFollower() {
 
       {/* Precision dot */}
       <motion.div
-        className="fixed top-0 left-0 w-1 h-1 rounded-full bg-white pointer-events-none z-500"
+        className="fixed top-0 left-0 w-1 h-1 rounded-full bg-white pointer-events-none z-[9999]"
         animate={{
           x: mousePosition.x,
           y: mousePosition.y,

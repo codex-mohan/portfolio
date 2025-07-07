@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { Calendar, MapPin, Briefcase, Building2, Code, Laptop, Zap, ChevronDown } from "lucide-react"
 import { useMobile } from "@/hooks/use-mobile"
+import { useRef } from "react"
 
 const experiences = [
   {
@@ -189,24 +190,34 @@ export function Timeline() {
               transition={{ duration: 0.3, delay: index * 0.1 + 0.4 }}
               viewport={{ once: true }}
             >
-              <motion.div
-                className="w-8 h-8 rounded-full bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 flex items-center justify-center"
-                animate={{
-                  y: [0, 5, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              >
-                <ChevronDown className="h-4 w-4 text-purple-400" />
-              </motion.div>
+              <TimelineProgressArrow index={index} />
             </motion.div>
           )}
         </div>
       ))}
     </div>
   )
+}
+
+function TimelineProgressArrow({ index }: { index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="w-8 h-8 rounded-full bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 flex items-center justify-center"
+      animate={isInView ? {
+        y: [0, 5, 0],
+        scale: [1, 1.1, 1],
+      } : {}}
+      transition={{
+        duration: 2,
+        repeat: isInView ? Number.POSITIVE_INFINITY : 0,
+        ease: "easeInOut",
+      }}
+    >
+      <ChevronDown className="h-4 w-4 text-purple-400" />
+    </motion.div>
+  );
 }

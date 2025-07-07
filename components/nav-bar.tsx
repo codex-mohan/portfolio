@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Menu, X, Download } from "lucide-react"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Menu, X, Download } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { useMobile } from "@/hooks/use-mobile"
+import { Button } from "@/components/ui/button";
+import { useMobile } from "@/hooks/use-mobile";
 
 export function NavBar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("")
-  const [isScrolled, setIsScrolled] = useState(false)
-  const isMobile = useMobile()
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useMobile();
 
   const navItems = [
     { name: "About", href: "#about" },
@@ -20,77 +20,80 @@ export function NavBar() {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-  ]
+  ];
 
   const handleNavClick = () => {
     if (isMobile) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }
+  };
 
   // Track scroll position for background blur effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 50);
 
-      const sections = navItems.map((item) => item.href.substring(1))
-      const scrollPosition = window.scrollY + 100
+      const sections = navItems.map((item) => item.href.substring(1));
+      const scrollPosition = window.scrollY + 100;
 
       if (window.scrollY < 100) {
-        setActiveSection("")
-        return
+        setActiveSection("");
+        return;
       }
 
       for (const sectionId of sections) {
-        const element = document.getElementById(sectionId)
+        const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId)
-            break
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(sectionId);
+            break;
           }
         }
       }
-    }
+    };
 
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Close mobile menu when clicking outside or pressing escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
+    };
 
     const handleClickOutside = (e: MouseEvent) => {
-      const nav = document.getElementById("nav-bar")
+      const nav = document.getElementById("nav-bar");
       if (nav && !nav.contains(e.target as Node)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
-      document.addEventListener("click", handleClickOutside)
+      document.addEventListener("keydown", handleEscape);
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape)
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [isOpen])
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const isActive = (href: string) => {
-    const sectionId = href.substring(1)
-    return activeSection === sectionId
-  }
+    const sectionId = href.substring(1);
+    return activeSection === sectionId;
+  };
 
   return (
     <>
@@ -98,7 +101,9 @@ export function NavBar() {
       <motion.nav
         id="nav-bar"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-zinc-900/95 backdrop-blur-md border-b border-zinc-800/50 shadow-lg" : "bg-transparent"
+          isScrolled
+            ? "bg-zinc-900/95 backdrop-blur-md border-b border-zinc-800/50 shadow-lg"
+            : "bg-transparent"
         }`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -111,9 +116,9 @@ export function NavBar() {
                 {/* Left: Brand */}
                 <Link href="/" className="font-bold text-lg flex-shrink-0">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                    Shine
+                    Codex
                   </span>
-                  <span className="text-white">Dev</span>
+                  <span className="text-white">Mohan</span>
                 </Link>
 
                 {/* Right: Menu button and indicator */}
@@ -132,8 +137,15 @@ export function NavBar() {
                     className="text-zinc-400 hover:text-white hover:bg-zinc-700/50 flex-shrink-0 h-8 w-8 p-0"
                     onClick={() => setIsOpen(!isOpen)}
                   >
-                    <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                      {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {isOpen ? (
+                        <X className="h-5 w-5" />
+                      ) : (
+                        <Menu className="h-5 w-5" />
+                      )}
                     </motion.div>
                   </Button>
                 </div>
@@ -167,7 +179,11 @@ export function NavBar() {
                           layoutId="activeSection"
                           className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full"
                           initial={false}
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                          }}
                         />
                       )}
 
@@ -178,7 +194,11 @@ export function NavBar() {
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0 }}
                           className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-600 shadow-lg"
-                          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 20,
+                          }}
                         />
                       )}
 
@@ -209,7 +229,11 @@ export function NavBar() {
                     {/* Icon with animation */}
                     <motion.div
                       animate={{ rotate: [0, 10, -10, 0] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
                       className="group-hover:text-purple-400 transition-colors duration-300"
                     >
                       <Download className="h-4 w-4" />
@@ -222,7 +246,11 @@ export function NavBar() {
                     <motion.div
                       className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
                     />
                   </motion.a>
                 </div>
@@ -237,7 +265,9 @@ export function NavBar() {
         <>
           {/* Backdrop */}
           <motion.div
-            className={`fixed inset-0 z-40 bg-black/80 backdrop-blur-sm ${isOpen ? "block" : "hidden"}`}
+            className={`fixed inset-0 z-40 bg-black/80 backdrop-blur-sm ${
+              isOpen ? "block" : "hidden"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: isOpen ? 1 : 0 }}
             transition={{ duration: 0.3 }}
@@ -246,7 +276,9 @@ export function NavBar() {
 
           {/* Mobile Menu */}
           <motion.div
-            className={`fixed top-16 left-4 right-4 z-50 ${isOpen ? "block" : "hidden"}`}
+            className={`fixed top-16 left-4 right-4 z-50 ${
+              isOpen ? "block" : "hidden"
+            }`}
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{
               opacity: isOpen ? 1 : 0,
@@ -282,7 +314,11 @@ export function NavBar() {
                             layoutId="activeSectionMobile"
                             className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg"
                             initial={false}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 30,
+                            }}
                           />
                         )}
 
@@ -321,7 +357,11 @@ export function NavBar() {
                       {/* Icon with animation */}
                       <motion.div
                         animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
                         className="group-hover:text-purple-400 transition-colors duration-300"
                       >
                         <Download className="h-5 w-5" />
@@ -338,5 +378,5 @@ export function NavBar() {
         </>
       )}
     </>
-  )
+  );
 }
