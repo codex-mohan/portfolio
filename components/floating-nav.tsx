@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { useMobile } from "@/hooks/use-mobile"
-import GradientButton from "@/components/ui/gradient-button"
+import { Button } from "@/components/ui/button";
+import { useMobile } from "@/hooks/use-mobile";
+import GradientButton from "@/components/ui/gradient-button";
 
 export function FloatingNav() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("")
-  const isMobile = useMobile()
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const isMobile = useMobile();
 
   const navItems = [
     { name: "About", href: "#about" },
@@ -20,79 +20,82 @@ export function FloatingNav() {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-  ]
+  ];
 
   const handleNavClick = () => {
     if (isMobile) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }
+  };
 
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map((item) => item.href.substring(1)) // Remove # from href
-      const scrollPosition = window.scrollY + 100 // Offset for better detection
+      const sections = navItems.map((item) => item.href.substring(1)); // Remove # from href
+      const scrollPosition = window.scrollY + 100; // Offset for better detection
 
       // Check if we're at the top of the page
       if (window.scrollY < 100) {
-        setActiveSection("")
-        return
+        setActiveSection("");
+        return;
       }
 
       for (const sectionId of sections) {
-        const element = document.getElementById(sectionId)
+        const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId)
-            break
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(sectionId);
+            break;
           }
         }
       }
-    }
+    };
 
     // Initial check
-    handleScroll()
+    handleScroll();
 
     // Add scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Close mobile menu when clicking outside or pressing escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
+    };
 
     const handleClickOutside = (e: MouseEvent) => {
-      const nav = document.getElementById("floating-nav")
+      const nav = document.getElementById("floating-nav");
       if (nav && !nav.contains(e.target as Node)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
-      document.addEventListener("click", handleClickOutside)
+      document.addEventListener("keydown", handleEscape);
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape)
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [isOpen])
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const isActive = (href: string) => {
-    const sectionId = href.substring(1) // Remove # from href
-    return activeSection === sectionId
-  }
+    const sectionId = href.substring(1); // Remove # from href
+    return activeSection === sectionId;
+  };
 
   return (
     <>
@@ -112,9 +115,9 @@ export function FloatingNav() {
               {/* Left: Brand */}
               <Link href="/" className="font-bold text-lg flex-shrink-0">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                  Shine
+                  Codex
                 </span>
-                <span className="text-white">Dev</span>
+                <span className="text-white">Mohan</span>
               </Link>
 
               {/* Right: Menu button and indicator */}
@@ -133,8 +136,15 @@ export function FloatingNav() {
                   className="text-zinc-400 hover:text-white hover:bg-zinc-700/50 flex-shrink-0 h-8 w-8 p-0"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {isOpen ? (
+                      <X className="h-5 w-5" />
+                    ) : (
+                      <Menu className="h-5 w-5" />
+                    )}
                   </motion.div>
                 </Button>
               </div>
@@ -168,7 +178,11 @@ export function FloatingNav() {
                         layoutId="activeSection"
                         className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full"
                         initial={false}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 30,
+                        }}
                       />
                     )}
 
@@ -179,7 +193,11 @@ export function FloatingNav() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0 }}
                         className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-600 shadow-lg"
-                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 20,
+                        }}
                       />
                     )}
 
@@ -211,7 +229,9 @@ export function FloatingNav() {
         <>
           {/* Backdrop */}
           <motion.div
-            className={`fixed inset-0 z-40 bg-black/80 backdrop-blur-sm ${isOpen ? "block" : "hidden"}`}
+            className={`fixed inset-0 z-40 bg-black/80 backdrop-blur-sm ${
+              isOpen ? "block" : "hidden"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: isOpen ? 1 : 0 }}
             transition={{ duration: 0.3 }}
@@ -220,7 +240,9 @@ export function FloatingNav() {
 
           {/* Mobile Menu */}
           <motion.div
-            className={`fixed top-20 left-4 right-4 z-50 ${isOpen ? "block" : "hidden"}`}
+            className={`fixed top-20 left-4 right-4 z-50 ${
+              isOpen ? "block" : "hidden"
+            }`}
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{
               opacity: isOpen ? 1 : 0,
@@ -256,7 +278,11 @@ export function FloatingNav() {
                             layoutId="activeSectionMobile"
                             className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg"
                             initial={false}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 30,
+                            }}
                           />
                         )}
 
@@ -299,5 +325,5 @@ export function FloatingNav() {
         </>
       )}
     </>
-  )
+  );
 }

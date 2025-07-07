@@ -155,9 +155,9 @@ export function NavBar() {
                 {/* Left: Brand */}
                 <Link href="/" className="font-bold text-xl flex-shrink-0">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                    Shine
+                    Codex
                   </span>
-                  <span className="text-white">Dev</span>
+                  <span className="text-white">Mohan</span>
                 </Link>
 
                 {/* Center: Navigation Items */}
