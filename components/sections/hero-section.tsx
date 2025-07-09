@@ -3,7 +3,6 @@
 import { ArrowRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 
-import { Button } from "@/components/ui/button";
 import GradientButton from "@/components/ui/gradient-button";
 import { CreativeHero } from "@/components/creative-hero";
 import { AnimatedSocialIcon } from "@/components/animated-social-icon";
@@ -132,7 +131,7 @@ export function HeroSection() {
             I craft exceptional digital experiences with code, creativity, and a
             passion for innovation.
           </motion.p>
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-wrap gap-6 pt-4">
             <GradientButton
               fromColor="from-purple-500"
               toColor="to-pink-500"
@@ -145,17 +144,18 @@ export function HeroSection() {
             >
               View Projects <ArrowRight className="ml-2 h-4 w-4" />
             </GradientButton>
-            <Button
-              variant="outline"
-              className="border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 bg-transparent"
+            <motion.button
+              className="border-zinc-700 text-zinc-300 hover:text-purple-400 hover:border-zinc-500 bg-transparent"
               onClick={() =>
                 document
                   .getElementById("contact")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Contact Me
-            </Button>
+            </motion.button>
           </div>
 
           {/* Social Icons */}

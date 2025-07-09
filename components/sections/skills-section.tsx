@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { SectionHeading } from "@/components/section-heading"
-import { SkillBadge } from "@/components/skill-badge"
+import { SectionHeading } from "@/components/section-heading";
+import { SkillBadge } from "@/components/skill-badge";
 
 const skills = [
   { name: "JavaScript", level: 90 },
@@ -16,7 +16,11 @@ const skills = [
   { name: "AWS", level: 65 },
   { name: "Docker", level: 60 },
   { name: "Git", level: 85 },
-]
+  { name: "PyTorch", level: 90 },
+  { name: "TensorFlow", level: 70 },
+  { name: "NumPy", level: 80 },
+  { name: "Pandas", level: 80 },
+];
 
 export function SkillsSection() {
   return (
@@ -34,10 +38,14 @@ export function SkillsSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
           {skills.map((skill, index) => (
-            <SkillBadge key={skill.name} name={skill.name} level={skill.level} />
+            <SkillBadge
+              key={skill.name}
+              name={skill.name}
+              level={skill.level}
+            />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

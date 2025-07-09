@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { SectionHeading } from "@/components/section-heading"
-import { GlassmorphicCard } from "@/components/glassmorphic-card"
+import { Button } from "@/components/ui/button";
+import { SectionHeading } from "@/components/section-heading";
+import { GlassmorphicCard } from "@/components/glassmorphic-card";
 
 export function AboutSection() {
   return (
@@ -31,7 +31,9 @@ export function AboutSection() {
               <div className="absolute bottom-0 left-0 w-full p-6">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-sm font-medium">Available for work</span>
+                  <span className="text-sm font-medium">
+                    Available for work
+                  </span>
                 </div>
               </div>
             </div>
@@ -40,45 +42,52 @@ export function AboutSection() {
           <div className="space-y-6">
             <GlassmorphicCard>
               <p className="text-lg text-zinc-300">
-                I'm a passionate software engineer with experience building web applications and digital products. I
-                specialize in frontend development with React and Next.js, but I'm also comfortable working with backend
-                technologies.
+                I'm a passionate software engineer with experience building web
+                applications and digital products. I specialize in frontend
+                development with React and Next.js, but I'm also comfortable
+                working with backend technologies.
               </p>
               <p className="text-lg text-zinc-300 mt-4">
-                My journey in tech started with a strong foundation in software development. I've worked with various
-                companies to create intuitive, performant, and accessible digital experiences.
+                My journey in tech started with a strong foundation in software
+                development. I've worked with various companies to create
+                intuitive, performant, and accessible digital experiences.
               </p>
               <p className="text-lg text-zinc-300 mt-4">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                and staying up-to-date with the latest industry trends.
+                When I'm not coding, you can find me exploring new technologies,
+                contributing to open-source projects, and staying up-to-date
+                with the latest industry trends.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <div className="space-y-1">
                   <div className="text-sm text-zinc-500">Name</div>
-                  <div className="font-medium">Shine Kyaw Kyaw Aung</div>
+                  <div className="font-medium">Mohana Krishna</div>
                 </div>
                 <div className="space-y-1">
                   <div className="text-sm text-zinc-500">Email</div>
-                  <div className="font-medium">hello@example.com</div>
+                  <div className="font-medium">codexmohan@gmail.com</div>
                 </div>
                 <div className="space-y-1">
                   <div className="text-sm text-zinc-500">Location</div>
-                  <div className="font-medium">Myanmar</div>
+                  <div className="font-medium">India</div>
                 </div>
                 <div className="space-y-1">
                   <div className="text-sm text-zinc-500">Availability</div>
-                  <div className="font-medium text-green-500">Open to opportunities</div>
+                  <div className="font-medium text-green-500">
+                    Open to opportunities
+                  </div>
                 </div>
               </div>
 
               <div className="mt-8">
-                <Button className="bg-zinc-800 hover:bg-zinc-700 text-white">Download Resume</Button>
+                <Button className="bg-zinc-800 hover:bg-zinc-700 text-white">
+                  Download Resume
+                </Button>
               </div>
             </GlassmorphicCard>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

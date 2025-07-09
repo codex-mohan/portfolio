@@ -1,14 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Github, Linkedin, Twitter, Mail, MessageCircle, Tag, Phone, ArrowUp } from "lucide-react"
-import { AnimatedSocialIcon } from "./animated-social-icon"
-import { motion } from "framer-motion"
-import { useState, useEffect, useRef } from "react"
+import Link from "next/link";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  MessageCircle,
+  Tag,
+  Phone,
+  ArrowUp,
+} from "lucide-react";
+import { AnimatedSocialIcon } from "./animated-social-icon";
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export function Footer() {
-  const [showBackToTop, setShowBackToTop] = useState(false)
-  const footerRef = useRef<HTMLElement>(null)
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
 
   // Define specific animations for each social icon based on their purpose
   const socialIcons = [
@@ -54,7 +63,7 @@ export function Footer() {
       label: "Phone",
       animation: "flip" as const, // Phone flipping
     },
-  ]
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -65,7 +74,7 @@ export function Footer() {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.7 },
@@ -80,36 +89,43 @@ export function Footer() {
         duration: 0.6,
       },
     },
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!footerRef.current) return
+      if (!footerRef.current) return;
 
-      const footerRect = footerRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
+      const footerRect = footerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
       // Show button when footer starts to come into view
-      const footerInView = footerRect.top <= windowHeight * 0.8
+      const footerInView = footerRect.top <= windowHeight * 0.8;
 
-      setShowBackToTop(footerInView)
-    }
+      setShowBackToTop(footerInView);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    handleScroll() // Check initial state
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial state
 
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   return (
     <footer ref={footerRef} className="relative py-16 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+        <div className="absolute top-1/2 left-10 w-32 h-32 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+      </div>
       <div className="container relative z-10">
         <div className="flex flex-col items-center space-y-8">
           {/* Diversified Social Icons */}
@@ -122,7 +138,7 @@ export function Footer() {
             {socialIcons.map((social, index) => (
               <motion.div
                 key={social.label}
-                variants={itemVariants}
+                variants={itemVariants as any}
                 whileHover={{ y: -8 }} // Additional hover lift effect
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
@@ -145,7 +161,7 @@ export function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
           >
-            © {new Date().getFullYear()} Shine Kyaw Kyaw Aung. All rights reserved.
+            © {new Date().getFullYear()} Codex Mohan. All rights reserved.
           </motion.p>
 
           {/* Email */}
@@ -155,10 +171,10 @@ export function Footer() {
             transition={{ delay: 1.4, duration: 0.6 }}
           >
             <Link
-              href="mailto:hello@example.com"
+              href="mailto:codexmohan@gmail.com.com"
               className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hover:from-pink-400 hover:to-purple-600 transition-all duration-300 font-medium hover:scale-105 inline-block"
             >
-              hello@shinekyawkyawaung.com
+              codexmohan@gmail.com
             </Link>
           </motion.div>
 
@@ -259,5 +275,5 @@ export function Footer() {
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,6 +1,7 @@
-"use client"
-import { motion } from "framer-motion"
+"use client";
+import { motion } from "framer-motion";
 import {
+  SiAmazonwebservices,
   SiJavascript,
   SiTypescript,
   SiReact,
@@ -12,11 +13,15 @@ import {
   SiPostgresql,
   SiDocker,
   SiGit,
-} from "react-icons/si"
+  SiPytorch,
+  SiTensorflow,
+  SiNumpy,
+  SiPandas,
+} from "react-icons/si";
 
 interface SkillBadgeProps {
-  name: string
-  level: number
+  name: string;
+  level: number;
 }
 
 const skillIcons: Record<string, any> = {
@@ -29,13 +34,17 @@ const skillIcons: Record<string, any> = {
   "Tailwind CSS": SiTailwindcss,
   GraphQL: SiGraphql,
   PostgreSQL: SiPostgresql,
-  AWS: SiJavascript,
+  AWS: SiAmazonwebservices,
   Docker: SiDocker,
   Git: SiGit,
-}
+  PyTorch: SiPytorch,
+  TensorFlow: SiTensorflow,
+  NumPy: SiNumpy,
+  Pandas: SiPandas,
+};
 
 export function SkillBadge({ name, level }: SkillBadgeProps) {
-  const IconComponent = skillIcons[name]
+  const IconComponent = skillIcons[name];
 
   return (
     <motion.div
@@ -72,5 +81,5 @@ export function SkillBadge({ name, level }: SkillBadgeProps) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
