@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import { Github, Linkedin, Mail } from "lucide-react"
-import { SectionHeading } from "@/components/section-heading"
-import { GlassmorphicCard } from "@/components/glassmorphic-card"
-import { ContactForm } from "@/components/contact-form"
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { SectionHeading } from "@/components/section-heading";
+import { GlassmorphicCard } from "@/components/glassmorphic-card";
+import { ContactForm } from "@/components/contact-form";
 
 export function ContactSection() {
   return (
@@ -25,29 +26,29 @@ export function ContactSection() {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 flex items-center justify-center">
-                  <Mail className="h-5 w-5 text-purple-400" />
+                  <MdEmail className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
                   <div className="text-sm text-zinc-500">Email</div>
-                  <div className="font-medium">hello@example.com</div>
+                  <div className="font-medium">codexmohan@gmail.com</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 flex items-center justify-center">
-                  <Linkedin className="h-5 w-5 text-purple-400" />
+                  <FaLinkedin className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
                   <div className="text-sm text-zinc-500">LinkedIn</div>
-                  <div className="font-medium">linkedin.com/in/shinekyawkyawaung</div>
+                  <div className="font-medium">linkedin.com/in/codex-mohan</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 flex items-center justify-center">
-                  <Github className="h-5 w-5 text-purple-400" />
+                  <FaGithub className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
                   <div className="text-sm text-zinc-500">GitHub</div>
-                  <div className="font-medium">github.com/shinekyawkyawaung</div>
+                  <div className="font-medium">github.com/codex-mohan</div>
                 </div>
               </div>
             </div>
@@ -56,7 +57,9 @@ export function ContactSection() {
               <h4 className="text-lg font-medium mb-4">Current Status</h4>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                <span>Available for freelance work and full-time opportunities</span>
+                <span>
+                  Available for freelance work and full-time opportunities
+                </span>
               </div>
             </div>
           </GlassmorphicCard>
@@ -65,5 +68,5 @@ export function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

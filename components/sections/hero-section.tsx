@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
-import { motion, easeOut } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { SiLinktree, SiGithub, SiLinkedin, SiX, SiGmail } from "react-icons/si";
+import { motion, easeOut, animate } from "framer-motion";
 
 import GradientButton from "@/components/ui/gradient-button";
 import { CreativeHero } from "@/components/creative-hero";
@@ -11,28 +12,34 @@ export function HeroSection() {
   // Define specific animations for hero social icons
   const heroSocialIcons = [
     {
-      icon: Github,
+      icon: SiGithub,
       href: "https://github.com/codex-mohan",
       label: "GitHub",
       animation: "rotate" as const,
     },
     {
-      icon: Linkedin,
+      icon: SiLinkedin,
       href: "https://www.linkedin.com/in/codex-mohan/",
       label: "LinkedIn",
       animation: "flip" as const,
     },
     {
-      icon: Twitter,
-      href: "https://twitter.com",
+      icon: SiX,
+      href: "https://twitter.com/codex-mohan",
       label: "Twitter",
       animation: "creative" as const,
     },
     {
-      icon: Mail,
-      href: "mailto:hello@example.com",
+      icon: SiGmail,
+      href: "mailto:codexmohan@gmail.com",
       label: "Email",
       animation: "rotate" as const,
+    },
+    {
+      icon: SiLinktree,
+      href: "https://linktr.ee/codex_mohan",
+      label: "Linktree",
+      animation: "flip" as const,
     },
   ];
 

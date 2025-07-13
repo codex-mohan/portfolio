@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
+import type { IconType } from "react-icons";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 
@@ -9,7 +10,7 @@ import { useEffect, useRef } from "react";
 const MotionLink = motion.create(Link);
 
 interface AnimatedSocialIconProps {
-  icon: LucideIcon;
+  icon: LucideIcon | IconType;
   href: string;
   label: string;
   animationType?: "flip" | "rotate" | "creative";

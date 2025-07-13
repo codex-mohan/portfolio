@@ -9,8 +9,36 @@ export function MouseFollower() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [cursorState, setCursorState] = useState<CursorState>("default");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if device is mobile/tablet based on touch capability and user agent
+    const checkMobile = () => {
+      // More reliable mobile detection: check for touch capability + user agent
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      
+      setIsMobile(hasTouch && isMobileDevice);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Listen for resize events (though less relevant for device detection)
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Don't initialize mouse follower on mobile/tablet devices
+    if (isMobile) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -118,9 +146,12 @@ export function MouseFollower() {
 
       // Restore default cursor
       document.body.style.cursor = "";
-      document.head.removeChild(style);
+      const existingStyle = document.head.querySelector('style');
+      if (existingStyle && existingStyle.textContent?.includes('cursor: none')) {
+        document.head.removeChild(existingStyle);
+      }
     };
-  }, []);
+  }, [isMobile]);
 
   const getCursorIcon = () => {
     switch (cursorState) {
@@ -547,6 +578,11 @@ export function MouseFollower() {
         return 1;
     }
   };
+
+  // Don't render mouse follower on mobile/tablet devices
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <>
